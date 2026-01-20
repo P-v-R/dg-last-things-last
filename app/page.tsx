@@ -1,65 +1,154 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { containers } from './data/sample-containers';
+import { containerTypeLabels } from './types';
 
 export default function Home() {
+  // Get container icon based on type
+  const getContainerIcon = (type: string) => {
+    switch (type) {
+      case 'filing-cabinet': return '🗄️';
+      case 'footlocker': return '📦';
+      case 'inbox': return '📧';
+      default: return '📁';
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="landing-container">
+      {/* Header */}
+      <div className="landing-header">
+        <div className="landing-title">
+          DELTA GREEN ARCHIVE SYSTEM
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="landing-subtitle">
+          Secure Document Management Portal - Classification: NEED TO KNOW
         </div>
-      </main>
+        <div style={{ fontSize: '11px', marginTop: '8px', opacity: 0.7 }}>
+          System Date: {new Date().toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          })}
+        </div>
+      </div>
+
+      {/* Main Window */}
+      <div className="window">
+        <div className="window-header">
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <span className="window-header-icon">🔒</span>
+            Archive Index - Available Containers
+          </div>
+          <div className="window-controls">
+            <button className="window-btn" title="Minimize">_</button>
+            <button className="window-btn" title="Maximize">□</button>
+            <button className="window-btn window-btn-close" title="Close">×</button>
+          </div>
+        </div>
+
+        <div className="toolbar">
+          <span style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+            📋 {containers.length} container(s) available
+          </span>
+        </div>
+
+        <div style={{ padding: '16px', background: '#ece9d8' }}>
+          {/* Instructions */}
+          <div style={{ 
+            background: '#fffff0', 
+            border: '1px solid #c0c0a0',
+            padding: '12px',
+            marginBottom: '16px',
+            fontSize: '11px'
+          }}>
+            <strong>⚠️ NOTICE:</strong> This system contains classified materials. 
+            Unauthorized access is prohibited. All activity is monitored and logged.
+            <br /><br />
+            <strong>Shareable Links:</strong> Copy the URL of any container page to share access with authorized personnel.
+          </div>
+
+          {/* Container List */}
+          {containers.map((container) => (
+            <Link 
+              key={container.id} 
+              href={`/container/${container.id}`}
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <div className="container-card">
+                <div className="container-card-header">
+                  <span>{getContainerIcon(container.type)}</span>
+                  <span>{containerTypeLabels[container.type]}</span>
+                </div>
+                <div className="container-card-body">
+                  <div className="container-card-type">
+                    ID: {container.id}
+                  </div>
+                  <div className="container-card-name">
+                    {container.name}
+                  </div>
+                  <div className="container-card-desc">
+                    {container.description}
+                  </div>
+                  <div style={{ 
+                    marginTop: '8px', 
+                    fontSize: '10px', 
+                    color: 'var(--text-secondary)' 
+                  }}>
+                    Created: {container.createdAt} | Files: {container.files.length}
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+
+          {/* Footer info */}
+          <div style={{ 
+            marginTop: '20px', 
+            textAlign: 'center',
+            fontSize: '10px',
+            color: 'var(--text-secondary)'
+          }}>
+            Delta Green Archive System v2.4.1 | © 2009 | For Official Use Only
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Links */}
+      <div style={{ 
+        marginTop: '20px', 
+        background: 'rgba(255,255,255,0.1)', 
+        padding: '16px',
+        borderRadius: '4px'
+      }}>
+        <div style={{ 
+          color: 'white', 
+          fontSize: '12px', 
+          fontWeight: 'bold', 
+          marginBottom: '8px',
+          textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
+        }}>
+          Quick Access Links:
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+          {containers.map((container) => (
+            <Link 
+              key={container.id}
+              href={`/container/${container.id}`}
+              style={{
+                background: 'var(--btn-gradient)',
+                border: '1px solid var(--border-control)',
+                padding: '6px 12px',
+                borderRadius: '3px',
+                fontSize: '11px',
+                color: 'var(--text-primary)',
+                textDecoration: 'none'
+              }}
+            >
+              {getContainerIcon(container.type)} {container.name.substring(0, 30)}...
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
