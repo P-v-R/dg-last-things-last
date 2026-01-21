@@ -552,3 +552,604 @@ body {
   50% { background: #90EE90; }
   100% { background: var(--bg-toolbar); }
 }
+
+/* ========================================
+   INVITE PAGE - VINTAGE TERMINAL STYLE
+   ======================================== */
+
+/* Phosphor text glow - creates the "bleed" effect */
+.invite-container,
+.invite-container * {
+  text-shadow:
+    0 0 1px currentColor,
+    0 0 3px currentColor,
+    0 0 6px currentColor;
+}
+
+.invite-container {
+  min-height: 100vh;
+  background: #0d1a0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+/* CRT Monitor effect */
+.invite-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    #0d1a0d 0%,
+    #061006 70%,
+    #020502 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* CRT Scanlines effect */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Screen flicker */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(32, 255, 32, 0.02);
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.02; }
+  50% { opacity: 0.04; }
+  100% { opacity: 0.02; }
+}
+
+/* Chromatic aberration / color bleed effect */
+.auth-window,
+.message-window {
+  position: relative;
+}
+
+.auth-window::before,
+.message-window::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(1px);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* Extra glow on borders to simulate phosphor bleed */
+.auth-window,
+.message-window {
+  box-shadow:
+    0 0 2px #33ff33,
+    0 0 4px #33ff33,
+    0 0 20px rgba(50, 255, 50, 0.4),
+    0 0 40px rgba(50, 255, 50, 0.2),
+    0 0 80px rgba(50, 255, 50, 0.1),
+    inset 0 0 30px rgba(50, 255, 50, 0.05);
+}
+
+/* ---- PASSWORD AUTHENTICATION ---- */
+.auth-window {
+  background: #0a140a;
+  border: 2px solid #33ff33;
+  box-shadow:
+    0 0 40px rgba(50, 255, 50, 0.3),
+    0 0 80px rgba(50, 255, 50, 0.1),
+    inset 0 0 60px rgba(50, 255, 50, 0.05);
+  width: 450px;
+  z-index: 10;
+  position: relative;
+}
+
+.auth-header {
+  background: #0a140a;
+  color: #33ff33;
+  padding: 12px 20px;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  border-bottom: 1px solid #33ff33;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.blink {
+  animation: blink 1s infinite;
+  color: #33ff33;
+  text-shadow: 0 0 10px #33ff33;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.auth-body {
+  padding: 40px 30px;
+  text-align: center;
+}
+
+.auth-icon {
+  font-size: 56px;
+  color: #33ff33;
+  margin-bottom: 24px;
+  text-shadow: 0 0 30px rgba(50, 255, 50, 0.8);
+}
+
+.auth-prompt {
+  color: #33ff33;
+  font-family: "Courier New", monospace;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  text-shadow:
+    0 0 2px #33ff33,
+    0 0 5px #33ff33,
+    0 0 10px #33ff33,
+    0 0 20px rgba(50, 255, 50, 0.5);
+}
+
+.auth-subtext {
+  color: #22aa22;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  margin-bottom: 30px;
+}
+
+.auth-input {
+  width: 100%;
+  background: #061006;
+  border: 2px solid #22aa22;
+  color: #33ff33;
+  font-family: "Courier New", monospace;
+  font-size: 18px;
+  padding: 14px 20px;
+  text-align: center;
+  letter-spacing: 6px;
+  margin-bottom: 20px;
+  outline: none;
+}
+
+.auth-input:focus {
+  border-color: #33ff33;
+  box-shadow: 0 0 20px rgba(50, 255, 50, 0.4);
+}
+
+.auth-input::placeholder {
+  color: #116611;
+}
+
+.auth-button {
+  background: #0a140a;
+  border: 2px solid #33ff33;
+  color: #33ff33;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  padding: 12px 40px;
+  letter-spacing: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  text-shadow: 0 0 10px rgba(50, 255, 50, 0.5);
+}
+
+.auth-button:hover {
+  background: #33ff33;
+  color: #0a140a;
+  box-shadow: 0 0 30px rgba(50, 255, 50, 0.6);
+  text-shadow: none;
+}
+
+.auth-error {
+  color: #ff4444;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  margin-top: 20px;
+  animation: shake 0.5s;
+  text-shadow: 0 0 10px rgba(255, 50, 50, 0.5);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.auth-footer {
+  background: #061006;
+  border-top: 1px solid #22aa22;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  color: #22aa22;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+  color: #33ff33;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; text-shadow: 0 0 5px #33ff33; }
+  50% { opacity: 1; text-shadow: 0 0 15px #33ff33; }
+}
+
+/* ---- AUTHENTICATED STATE ---- */
+.invite-container.authenticated {
+  background: #0d1a0d;
+}
+
+/* Self-destruct timer - MORE PROMINENT */
+.destruct-timer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #0a140a;
+  border: 2px solid #ff4444;
+  padding: 16px 24px;
+  z-index: 100;
+  text-align: center;
+  min-width: 180px;
+  box-shadow:
+    0 0 30px rgba(255, 50, 50, 0.4),
+    inset 0 0 30px rgba(255, 50, 50, 0.1);
+}
+
+.timer-label {
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  color: #ff6666;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+  text-shadow: 0 0 10px rgba(255, 50, 50, 0.5);
+}
+
+.timer-value {
+  font-family: "Courier New", monospace;
+  font-size: 36px;
+  color: #ff4444;
+  font-weight: bold;
+  text-shadow:
+    0 0 2px #ff4444,
+    0 0 5px #ff4444,
+    0 0 10px #ff4444,
+    0 0 20px rgba(255, 50, 50, 0.8),
+    0 0 40px rgba(255, 50, 50, 0.4);
+}
+
+.timer-bar {
+  height: 4px;
+  background: #330000;
+  margin-top: 12px;
+  overflow: hidden;
+  border: 1px solid #ff4444;
+}
+
+.timer-fill {
+  height: 100%;
+  background: #ff4444;
+  transition: width 1s linear;
+  box-shadow: 0 0 10px #ff4444;
+}
+
+.destruct-timer.critical {
+  animation: criticalBorder 0.5s infinite;
+}
+
+.destruct-timer.critical .timer-value {
+  animation: criticalPulse 0.3s infinite;
+}
+
+.destruct-timer.critical .timer-fill {
+  background: #ff0000;
+}
+
+@keyframes criticalPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes criticalBorder {
+  0%, 100% { box-shadow: 0 0 30px rgba(255, 50, 50, 0.4), inset 0 0 30px rgba(255, 50, 50, 0.1); }
+  50% { box-shadow: 0 0 50px rgba(255, 0, 0, 0.8), inset 0 0 50px rgba(255, 0, 0, 0.2); }
+}
+
+/* Main message window */
+.message-window {
+  background: #0a140a;
+  border: 2px solid #33ff33;
+  max-width: 650px;
+  width: 90%;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+  box-shadow:
+    0 0 40px rgba(50, 255, 50, 0.2),
+    inset 0 0 60px rgba(50, 255, 50, 0.05);
+}
+
+.message-window.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.message-window.glitch {
+  animation: glitch 0.1s;
+}
+
+@keyframes glitch {
+  0% { transform: translateX(0); filter: none; }
+  25% { transform: translateX(-5px) skewX(1deg); filter: hue-rotate(90deg); }
+  50% { transform: translateX(5px) skewX(-1deg); filter: hue-rotate(-90deg) brightness(1.5); }
+  75% { transform: translateX(-3px); filter: brightness(2); }
+  100% { transform: translateX(0); filter: none; }
+}
+
+.message-header {
+  background: #061006;
+  padding: 14px 24px;
+  border-bottom: 1px solid #33ff33;
+  text-align: center;
+}
+
+.message-header span {
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  color: #33ff33;
+  letter-spacing: 5px;
+  text-shadow: 0 0 10px rgba(50, 255, 50, 0.5);
+}
+
+.message-body {
+  padding: 30px;
+  font-family: "Courier New", monospace;
+}
+
+.message-classification {
+  text-align: center;
+  color: #ff6666;
+  font-size: 14px;
+  letter-spacing: 8px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed #22aa22;
+  text-shadow: 0 0 10px rgba(255, 100, 100, 0.5);
+}
+
+.message-greeting {
+  color: #33ff33;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 24px;
+  font-style: italic;
+  text-shadow: 0 0 8px rgba(50, 255, 50, 0.4);
+}
+
+.message-content {
+  color: #22dd22;
+  font-size: 13px;
+  line-height: 2;
+  margin-bottom: 24px;
+}
+
+.message-content p {
+  margin-bottom: 18px;
+}
+
+.message-content em {
+  color: #33ff33;
+  font-style: normal;
+  text-shadow: 0 0 8px rgba(50, 255, 50, 0.5);
+}
+
+.message-details {
+  background: #061006;
+  border: 1px solid #22aa22;
+  padding: 24px;
+  margin: 24px 0;
+}
+
+.detail-row {
+  display: flex;
+  margin-bottom: 14px;
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  color: #22aa22;
+  font-size: 12px;
+  width: 100px;
+  letter-spacing: 2px;
+}
+
+.detail-value {
+  color: #33ff33;
+  font-size: 14px;
+  flex: 1;
+  text-shadow:
+    0 0 2px #33ff33,
+    0 0 5px #33ff33,
+    0 0 10px rgba(50, 255, 50, 0.6);
+}
+
+.message-warning {
+  text-align: center;
+  color: #ffaa00;
+  font-size: 13px;
+  margin: 28px 0;
+  line-height: 2;
+  text-shadow: 0 0 10px rgba(255, 170, 0, 0.4);
+}
+
+.message-warning p {
+  margin: 10px 0;
+}
+
+.message-closing {
+  text-align: center;
+  padding: 24px 0;
+  border-top: 1px dashed #22aa22;
+  margin-top: 24px;
+}
+
+.closing-symbol {
+  font-size: 32px;
+  color: #33ff33;
+  margin-bottom: 0;
+  text-shadow:
+    0 0 2px #33ff33,
+    0 0 5px #33ff33,
+    0 0 15px #33ff33,
+    0 0 30px rgba(50, 255, 50, 0.6);
+}
+
+.message-footer {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px dashed #22aa22;
+  margin-top: 20px;
+}
+
+.footer-code {
+  color: #116611;
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+/* Final warning overlay */
+.final-warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 0, 0, 0.15);
+  z-index: 50;
+  animation: warningFlash 0.2s infinite;
+}
+
+.final-warning span {
+  font-family: "Courier New", monospace;
+  font-size: 32px;
+  color: #ff0000;
+  letter-spacing: 10px;
+  text-shadow: 0 0 30px #ff0000;
+}
+
+@keyframes warningFlash {
+  0%, 100% { opacity: 1; background: rgba(255, 0, 0, 0.15); }
+  50% { opacity: 0.5; background: rgba(255, 0, 0, 0.3); }
+}
+
+/* ---- DESTROYED STATE ---- */
+.invite-container.destroyed {
+  background: #020502;
+}
+
+.static-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  animation: staticFlicker 0.05s infinite;
+}
+
+@keyframes staticFlicker {
+  0% { opacity: 0.05; }
+  50% { opacity: 0.12; }
+  100% { opacity: 0.05; }
+}
+
+.destroy-message {
+  text-align: center;
+  z-index: 10;
+}
+
+.destroy-icon {
+  font-size: 72px;
+  color: #33ff33;
+  margin-bottom: 24px;
+  text-shadow: 0 0 30px rgba(50, 255, 50, 0.5);
+  animation: destroyPulse 2s infinite;
+}
+
+@keyframes destroyPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+.destroy-text {
+  font-family: "Courier New", monospace;
+  font-size: 20px;
+  color: #33ff33;
+  letter-spacing: 8px;
+  margin-bottom: 16px;
+  text-shadow: 0 0 15px rgba(50, 255, 50, 0.5);
+}
+
+.destroy-subtext {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  color: #22aa22;
+  margin-bottom: 24px;
+}
+
+.destroy-code {
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  color: #116611;
+  letter-spacing: 3px;
+}
