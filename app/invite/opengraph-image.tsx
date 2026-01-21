@@ -37,17 +37,18 @@ export default async function Image() {
           }}
         />
 
-        {/* Green triangle */}
+        {/* Green triangle using CSS borders */}
         <div
           style={{
-            fontSize: 200,
-            color: '#33ff33',
-            textShadow: '0 0 30px #33ff33, 0 0 60px #33ff33, 0 0 90px rgba(50, 255, 50, 0.5)',
-            marginBottom: 40,
+            width: 0,
+            height: 0,
+            borderLeft: '80px solid transparent',
+            borderRight: '80px solid transparent',
+            borderBottom: '140px solid #33ff33',
+            marginBottom: 50,
+            filter: 'drop-shadow(0 0 20px #33ff33) drop-shadow(0 0 40px #33ff33)',
           }}
-        >
-          △
-        </div>
+        />
 
         {/* Title */}
         <div
