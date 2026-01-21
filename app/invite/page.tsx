@@ -6,7 +6,7 @@ export default function InvitePage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  const [timeRemaining, setTimeRemaining] = useState(60)
+  const [timeRemaining, setTimeRemaining] = useState(45)
   const [isDestroyed, setIsDestroyed] = useState(false)
   const [showContent, setShowContent] = useState(false)
   const [glitchText, setGlitchText] = useState(false)
