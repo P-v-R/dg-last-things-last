@@ -1509,11 +1509,14 @@ CAUSE: Cardiac arrest (natural causes)
 
 FAMILY:
 - Wife: Marlene Teresa Baughman (née Hoffman)
-  Status: DECEASED (10/2007) - hiking accident, body not recovered
+  Status: DECEASED (10/2007) - hiking accident.
   
 - Sister: Susan Elaine Morales (née Baughman)
   Status: Living, Riverside CA
   Note: NOT READ IN. Standard cover applies.
+
+- Two Children: Emily (b. 1985), Jacob (b. 1987)
+- Grandchildren: Kacie (b. 2004)
 
 ---
 

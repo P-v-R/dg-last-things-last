@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect, useCallback } from 'react';
+import { useState, useMemo, useEffect} from 'react';
 import { Container, FileItem, fileTypeIcons, containerTypeLabels } from '../types';
 import DocumentViewer from './DocumentViewer';
 
