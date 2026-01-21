@@ -10,8 +10,9 @@ export default function InvitePage() {
   const [isDestroyed, setIsDestroyed] = useState(false)
   const [showContent, setShowContent] = useState(false)
   const [glitchText, setGlitchText] = useState(false)
+  const [showAddress, setShowAddress] = useState(false)
 
-  const CORRECT_PASSWORD = 'GREENHOUSE'
+const VALID_PASSWORDS = ['GREENHOUSE', 'REDDIT']
 
   // Self-destruct countdown
   useEffect(() => {
@@ -45,8 +46,10 @@ export default function InvitePage() {
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
-    if (password.toUpperCase() === CORRECT_PASSWORD) {
+    const upperPassword = password.toUpperCase()
+    if (VALID_PASSWORDS.includes(upperPassword)) {
       setIsAuthenticated(true)
+      setShowAddress(upperPassword === 'GREENHOUSE')
       setError('')
     } else {
       setError('ACCESS DENIED')
@@ -162,10 +165,12 @@ export default function InvitePage() {
               <span className="detail-label">TIME:</span>
               <span className="detail-value">18:00 hours</span>
             </div>
-            <div className="detail-row">
-              <span className="detail-label">LOCATION:</span>
-              <span className="detail-value">3234 W 27th St, Los Angeles</span>
-            </div>
+            {showAddress && (
+              <div className="detail-row">
+                <span className="detail-label">LOCATION:</span>
+                <span className="detail-value">3234 W 27th St, Los Angeles</span>
+              </div>
+            )}
           </div>
 
           <div className="message-warning">
