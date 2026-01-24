@@ -855,7 +855,7 @@ check the pronunciation. i checked. L checked. 3 times.
 
 the eyes      the eyes      the eyes
 
-i have to fix it. the coup. fix it at the coup.
+i have to fix it. the coop. fix it at the coop.
 
 [written sideways in margin]:
 still hear her
