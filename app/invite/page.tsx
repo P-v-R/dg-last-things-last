@@ -26,10 +26,10 @@ export default function InvitePage() {
             will prepare accordingly.
           </p>
 
-          <p>
+          {/* <p>
             <span className="emphasis">Rally point:</span>{" "}
             <span className="redacted">LOCATION TBD</span>. Saturday, 0900.
-          </p>
+          </p> */}
 
           <p>Don&apos;t make me regret this.</p>
         </div>
